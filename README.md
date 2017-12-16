@@ -2,7 +2,7 @@
 
 You can use the generator to convert a tab delimited file of questions (called `survey.tsv`)
 with a standard [experiment factory config.json](https://expfactory.github.io/expfactory/contribute#the-experiment-config)
-to generate a folder with web content to serve your experiment.
+to generate a folder with web content to serve your experiment. You can build the container from this repository, or an image is provided on [Docker Hub](https://hub.docker.com/r/vanessa/survey-generator/).
 
 ## Usage
 
