@@ -3,7 +3,7 @@
 '''
 survey.py: plugin to work with expfactory package to generate survey
 
-Copyright (C) 2017 Vanessa Sochat.
+Copyright (C) 2017-2018 Vanessa Sochat.
 
 This program is free software: you can redistribute it and/or modify it
 under the terms of the GNU Affero General Public License as published by
@@ -31,7 +31,6 @@ import json
 import sys
 import re
 import os
-
 
 def get_question_types():
    '''get_question_types returns a list of possible question types
