@@ -145,6 +145,7 @@ jobs:
           command: |
             source ${BASH_ENV}
             echo "The Experiment Factory!"
+            echo "Step 1: Building Container and Survey"
             echo "[run] docker run ${CONTAINER_NAME}:${DOCKER_TAG} start"
             docker run --name surveys -td --entrypoint bash ${CONTAINER_NAME}:${DOCKER_TAG}
             echo "[cp] docker cp ./tmp/src/. surveys:/code/"
@@ -155,6 +156,12 @@ jobs:
             docker exec surveys ls /data
             echo "[exec] docker exec surveys /bin/bash /code/entrypoint.sh start"
             docker exec surveys /bin/bash /code/entrypoint.sh start
+            echo "Step 2: "Saving result as artifact for inspection"
+            mkdir -p /tmp/survey
+            echo "[cp] docker cp surveys:/data/. /tmp/survey/"
+            docker cp surveys:/data/. /tmp/survey/
+      - store_artifacts:
+          path: /tmp/survey
       - run: *dockersave
 
   deploy:
