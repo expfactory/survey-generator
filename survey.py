@@ -32,10 +32,6 @@ import sys
 import re
 import os
 
-# Ignore numpy warning about dttype
-import warnings
-warnings.filterwarnings("always")
-
 def get_question_types():
    '''get_question_types returns a list of possible question types
    '''
