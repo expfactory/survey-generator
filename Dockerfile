@@ -7,7 +7,7 @@ WORKDIR /opt
 RUN git clone https://www.github.com/expfactory/expfactory
 WORKDIR expfactory 
 RUN python3 setup.py install
-RUN python3 -m pip install pandas
+RUN python3 -m pip install --no-binary pandas
 
 RUN mkdir /code  # for script
 WORKDIR /code
