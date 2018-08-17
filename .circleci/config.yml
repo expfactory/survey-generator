@@ -1,4 +1,4 @@
-# This is a continuous build CircleCI configuration for cromwell,
+# This is a continuous build CircleCI configuration for a Docker container
 # intended to bulid on CircleCI to spread out testing over Travis/Cricle.
 # The container is built and pushed to the CONTAINER_NAME variable
 # defined here or within the CircleCI settings. The following environment
@@ -7,6 +7,7 @@
 # CONTAINER_NAME if not set, will use Github repo and organization name 
 # DOCKER_USER
 # DOCKER_EMAIL
+# Dockerfile optional, if the path is different than the Dockerfile in $PWD
 
 ################################################################################
 # Functions
