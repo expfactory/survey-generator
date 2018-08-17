@@ -21,11 +21,13 @@ defaults: &defaults
   working_directory: /tmp/src
 
 # Installation
+
 install: &install
     name: Install parallel gzip, gettext, python3, and jq
     command: apk add --no-cache pigz python3 gettext jq
 
 # Environment
+
 sourceenv: &sourceenv
     name: Source environment variables from the BASH_ENV
     command: source $BASH_ENV 
@@ -165,6 +167,16 @@ jobs:
           path: /tmp/survey
       - run: *dockersave
 
+  update_cache:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - save_cache:
+         key: docker-v1-{{ .Branch }}
+         paths:
+            - /tmp/cache/container.tar.gz
+
   deploy:
     <<: *defaults
     steps:
@@ -194,10 +206,22 @@ workflows:
             tags:
               only: /.*/
 
+      - update_cache:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: 
+                - gh-pages
+                - /docs?/.*/
+            tags:
+              only: /.*/
+
       # Upload the container to Docker Hub
       - deploy:
           requires:
             - build
+            - update_cache
           filters:
             branches:
               only: master
