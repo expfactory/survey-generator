@@ -44,11 +44,8 @@ if [ "$1" == "start" ]; then
         if [ -e "/data/README.md" ]; then
             echo "Found README.md in output destination, will not overwrite"
         else
-            if [ -e "/data/README" ]; then
-                echo "Renaming README to README.md"
-                cp /code/README.md /data/README.md
-            else
-                cp /code/README /data/README.md
+            if [ -e "/code/README.md" ]; then
+                cp /code/README.md /data
                 echo "README.md"
             fi
         fi
