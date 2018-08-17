@@ -99,6 +99,7 @@ dockerdeploy: &dockerdeploy
     no_output_timeout: 40m
     command: |
       source ${BASH_ENV}
+      docker images
       echo "Container name set to ${CONTAINER_NAME}:${DOCKER_TAG}"
       if [[ -n "$DOCKER_PASS" ]]; then
             docker login -u $DOCKER_USER -p $DOCKER_PASS
@@ -113,8 +114,6 @@ dockerbuild: &dockerbuild
     command: |
       source ${BASH_ENV}
       docker build -f ${DOCKERFILE} -t ${CONTAINER_NAME}:${DOCKER_TAG} .
-
-
 
 
 ################################################################################
@@ -161,6 +160,7 @@ jobs:
             docker cp surveys:/data/. /tmp/survey/
             tar -zcvf "/tmp/archive/${EXPFACTORY_SURVEY}.tar.gz" /tmp/survey
             mv /tmp/archive/${EXPFACTORY_SURVEY}.tar.gz /tmp/survey
+            docker stop surveys
       - store_artifacts:
           path: /tmp/survey
       - run: *dockersave
