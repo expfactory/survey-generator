@@ -140,6 +140,29 @@ jobs:
       - run: *install
       - run: *dockerload
       - run: *dockerbuild
+      - run:
+          name: Run tests
+          command: |
+            source ${BASH_ENV}
+            echo "The Experiment Factory!"
+            echo "[run] docker run ${CONTAINER_NAME}:${DOCKER_TAG} start"
+            docker run --name surveys -td --entrypoint bash ${CONTAINER_NAME}:${DOCKER_TAG}
+            echo "[cp] docker cp ./tmp/src/. surveys:/code/"
+            docker cp $PWD/${EXPFACTORY_SURVEY}/. surveys:/data/
+            echo "[exec] docker exec surveys ls /code"
+            docker exec surveys ls /code
+            echo "[exec] docker exec surveys ls /data"
+            docker exec surveys ls /data
+            echo "[exec] docker exec surveys /bin/bash /code/entrypoint.sh start"
+            docker exec surveys /bin/bash /code/entrypoint.sh start
+            echo "Step 2: Saving result as artifact for inspection"
+            mkdir -p /tmp/survey /tmp/archive
+            echo "[cp] docker cp surveys:/data/. /tmp/survey/"
+            docker cp surveys:/data/. /tmp/survey/
+            tar -zcvf "/tmp/archive/${EXPFACTORY_SURVEY}.tar.gz" /tmp/survey
+            mv /tmp/archive/${EXPFACTORY_SURVEY}.tar.gz /tmp/survey
+      - store_artifacts:
+          path: /tmp/survey
       - run: *dockersave
 
   deploy:
