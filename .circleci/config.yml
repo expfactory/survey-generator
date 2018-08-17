@@ -57,11 +57,15 @@ dockerenv: &dockerenv
         else
             echo "Repository name found defined for build: ${REPO_NAME}"
         fi
+        if [ ! -n "${EXPFACTORY_SURVEY:-}" ]; then
+            EXPFACTORY_SURVEY=state-mindfulness-survey
+        fi
         # export to bash environment
         echo "export CONTAINER_NAME=${CONTAINER_NAME}" >> ${BASH_ENV}
         echo "export DOCKER_TAG=${DOCKER_TAG}" >> ${BASH_ENV}
         echo "export REPO_NAME=${REPO_NAME}" >> ${BASH_ENV}
         echo "export DOCKERFILE=${DOCKERFILE}" >> ${BASH_ENV}
+        echo "export EXPFACTORY_SURVEY=${EXPFACTORY_SURVEY}" >> ${BASH_ENV}
         cat ${BASH_ENV}
 
 
@@ -141,12 +145,15 @@ jobs:
           command: |
             source ${BASH_ENV}
             echo "The Experiment Factory!"
-            echo "docker run ${CONTAINER_NAME}:${DOCKER_TAG} start"
+            echo "[run] docker run ${CONTAINER_NAME}:${DOCKER_TAG} start"
             docker run --name surveys -td --entrypoint bash ${CONTAINER_NAME}:${DOCKER_TAG}
-            echo "docker cp ./tmp/src/. surveys:/code/"
-            docker cp $PWD/. surveys:/data/
+            echo "[cp] docker cp ./tmp/src/. surveys:/code/"
+            docker cp $PWD/${EXPFACTORY_SURVEY}/. surveys:/data/
+            echo "[exec] docker exec surveys ls /code"
             docker exec surveys ls /code
+            echo "[exec] docker exec surveys ls /data"
             docker exec surveys ls /data
+            echo "[exec] docker exec surveys /bin/bash /code/entrypoint.sh start"
             docker exec surveys /bin/bash /code/entrypoint.sh start
       - run: *dockersave
 
