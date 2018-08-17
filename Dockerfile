@@ -1,5 +1,7 @@
 FROM ubuntu:16.04
 
+# docker build -t vanessa/survey-generator
+
 RUN apt-get update && apt-get install -y git python3-pip python3-dev
 WORKDIR /opt 
 RUN git clone https://www.github.com/expfactory/expfactory
