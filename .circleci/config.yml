@@ -145,6 +145,8 @@ jobs:
             docker run --name surveys -td --entrypoint bash ${CONTAINER_NAME}:${DOCKER_TAG}
             echo "docker cp ./tmp/src/. surveys:/code/"
             docker cp $PWD/. surveys:/data/
+            docker exec surveys ls /code
+            docker exec surveys ls /data
             docker exec surveys /bin/bash /code/entrypoint.sh start
       - run: *dockersave
 
