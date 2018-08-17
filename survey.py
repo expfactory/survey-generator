@@ -18,10 +18,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
-# Ignore numpy warning about dttype
-import warnings
-warnings.filterwarnings("always")
-
 from expfactory.utils import (
     write_file,
     get_template,
@@ -35,6 +31,10 @@ import json
 import sys
 import re
 import os
+
+# Ignore numpy warning about dttype
+import warnings
+warnings.filterwarnings("numpy.dtype size change")
 
 
 def get_question_types():

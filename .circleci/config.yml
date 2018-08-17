@@ -160,7 +160,7 @@ jobs:
             mkdir -p /tmp/survey /tmp/archive
             echo "[cp] docker cp surveys:/data/. /tmp/survey/"
             docker cp surveys:/data/. /tmp/survey/
-            tar -zcvf /tmp/archive/${EXPFACTORY_SURVEY}.tar.gz /tmp/survey
+            tar -zcvf "/tmp/archive/${EXPFACTORY_SURVEY}.tar.gz" /tmp/survey
             mv /tmp/archive/${EXPFACTORY_SURVEY}.tar.gz /tmp/survey
       - store_artifacts:
           path: /tmp/survey
