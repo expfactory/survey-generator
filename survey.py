@@ -116,7 +116,7 @@ def create_radio(text,id_attribute,options,values,classes="",required=0,validate
     validate: throw an error in the case that number of values != number of option (for testing)
 
     ''' 
-    class_names = "mdl-radio mdl-js-radio mdl-js-ripple-effect"       
+    class_names = "mdl-radio mdl-js-radio mdl-js-ripple-effect likert"       
 
     options,values = format_options_values(options,values)
     
