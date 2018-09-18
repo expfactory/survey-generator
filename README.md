@@ -70,3 +70,12 @@ If you want to build the image:
 ```
 docker build -t vanessa/expfactory-survey .
 ```
+
+You will want to update the [VERSION](VERSION) file that is used to build the
+image in continuous integration, and push a release candidate to Docker Hub for testing:
+
+```bash
+VERSION=$(cat VERSION)
+docker build -t expfactory/survey-builder:${VERSION}rc
+docker push expfactory/survey-builder:${VERSION}rc
+```
