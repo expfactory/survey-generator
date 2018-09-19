@@ -40,7 +40,7 @@ config.json    survey.tsv
 The output is minimal, but when we finish, our survey is ready!
 
 ```
-$ docker run -v $PWD:/data vanessa/expfactory-survey start
+$ docker run -v $PWD:/data expfactory/survey-generator start
 Writing output files to /data/index.html
 index.html
 js
@@ -76,6 +76,6 @@ image in continuous integration, and push a release candidate to Docker Hub for 
 
 ```bash
 VERSION=$(cat VERSION)
-docker build -t expfactory/survey-builder:${VERSION}rc
+docker build -t expfactory/survey-builder:${VERSION}rc .
 docker push expfactory/survey-builder:${VERSION}rc
 ```

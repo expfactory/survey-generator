@@ -116,7 +116,7 @@ def create_radio(text,id_attribute,options,values,classes="",required=0,validate
     validate: throw an error in the case that number of values != number of option (for testing)
 
     ''' 
-    class_names = "mdl-radio mdl-js-radio mdl-js-ripple-effect likert"       
+    class_names = "mdl-radio mdl-js-radio mdl-js-ripple-effect"       
 
     options,values = format_options_values(options,values)
     
@@ -130,7 +130,7 @@ def create_radio(text,id_attribute,options,values,classes="",required=0,validate
 
     # If options provided are equal to values, parse the question
     if len(options) == len(values):
-        radio_html = '<p id="%s_options">%s</p>' %(id_attribute,text)
+        radio_html = '<p id="%s_options" class="likert">%s</p>' %(id_attribute,text)
         for n in range(len(options)):
             option_id = "%s_%s" %(id_attribute,n)
             radio_html = '%s\n<label class="%s" for="option-%s">\n<input type="radio" id="option-%s" class="mdl-radio__button %s %s" name="%s_options" value="%s" %s>\n<span class="mdl-radio__label">%s</span>\n</label>' %(radio_html,class_names,option_id,option_id,required,classes,id_attribute,values[n],meta,options[n])
