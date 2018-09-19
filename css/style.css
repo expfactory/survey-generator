@@ -162,7 +162,7 @@ p {
 
 /* Add gray line for Likert */
 
-form p:before {
+form p.likert:before {
   content: '';
   position:relative;
   top:53px;

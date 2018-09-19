@@ -107,8 +107,10 @@ dockerdeploy: &dockerdeploy
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push ${CONTAINER_NAME}:${DOCKER_TAG}
             echo "Tagging latest image..."
+            docker tag ${CONTAINER_NAME}:${DOCKER_TAG} ${CONTAINER_NAME}:${MANUAL_VERSION}
             docker tag ${CONTAINER_NAME}:${DOCKER_TAG} ${CONTAINER_NAME}:latest
             docker push ${CONTAINER_NAME}:latest
+            docker push ${CONTAINER_NAME}:${MANUAL_VERSION}
       fi
 
 dockerbuild: &dockerbuild
@@ -144,6 +146,8 @@ jobs:
       - run:
           name: Run tests
           command: |
+            MANUAL_VERSION=$(cat /tmp/src/VERSION)
+            echo "export MANUAL_VERSION=${MANUAL_VERSION}" >> ${BASH_ENV}        
             source ${BASH_ENV}
             echo "The Experiment Factory!"
             echo "[run] docker run ${CONTAINER_NAME}:${DOCKER_TAG} start"

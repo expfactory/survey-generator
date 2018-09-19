@@ -15,6 +15,7 @@ builds on Docker Hub.
  - changed behaviour (recipe sections work differently)
 
 ## [master](https://github.com/expfactory/survey-generator/tree/master) (master)
+ - removing gray line drawn for non-likert types, issue #6 (0.0.3)
  - fixing bug with numeric field, changing text with regular expression (0.0.2)
  - adding this CHANGELOG and releases too
  - initial release (0.0.1)

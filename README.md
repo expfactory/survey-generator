@@ -2,7 +2,7 @@
 
 You can use the generator to convert a tab delimited file of questions (called `survey.tsv`)
 with a standard [experiment factory config.json](https://expfactory.github.io/expfactory/contribute#the-experiment-config)
-to generate a folder with web content to serve your experiment. You can build the container from this repository, or an image is provided on [Docker Hub](https://hub.docker.com/r/vanessa/survey-generator/).
+to generate a folder with web content to serve your experiment. You can build the container from this repository, or an image is provided on [Docker Hub](https://hub.docker.com/r/expfactory/survey-generator/).
 
 ## Usage
 
@@ -40,7 +40,7 @@ config.json    survey.tsv
 The output is minimal, but when we finish, our survey is ready!
 
 ```
-$ docker run -v $PWD:/data vanessa/expfactory-survey start
+$ docker run -v $PWD:/data expfactory/survey-generator start
 Writing output files to /data/index.html
 index.html
 js
@@ -69,4 +69,13 @@ If you want to build the image:
 
 ```
 docker build -t vanessa/expfactory-survey .
+```
+
+You will want to update the [VERSION](VERSION) file that is used to build the
+image in continuous integration, and push a release candidate to Docker Hub for testing:
+
+```bash
+VERSION=$(cat VERSION)
+docker build -t expfactory/survey-builder:${VERSION}rc .
+docker push expfactory/survey-builder:${VERSION}rc
 ```
