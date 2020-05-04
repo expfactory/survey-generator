@@ -30,7 +30,6 @@ because most of the arguments are set in the image. We just need to make sure th
  - 3. we map the `$PWD` (or where our survey and config are) to `/data` in the container
 
 
-
 ```bash
 cd state-mindfulness-survey
 ls 
