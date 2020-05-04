@@ -198,7 +198,7 @@ jobs:
 
 
 workflows:
-  version: 2
+  version: 2.1
   build_deploy:
     jobs:
       - build:
