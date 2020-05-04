@@ -1,7 +1,7 @@
 # Experiment Factory Survey Generator
 
 You can use the generator to convert a tab delimited file of questions (called `survey.tsv`)
-with a standard [experiment factory config.json](https://expfactory.github.io/expfactory/contribute#the-experiment-config)
+with a standard [experiment factory config.json](https://expfactory.github.io/contribute#the-experiment-config)
 to generate a folder with web content to serve your experiment. You can build the container from this repository, or an image is provided on [Docker Hub](https://hub.docker.com/r/expfactory/survey-generator/).
 
 ## Usage
@@ -18,7 +18,7 @@ first row, the header:
  - `option_text`: For radio and checkboxes, you are asking the user to select from one or more options. These should be the text portion (what the user sees on the screen), and separated by commas (e.g, Yes,No,Sometimes. Note: these fields are not required for instructions or textbox types, and can be left as empty tabs.
  - `option_values`: Also for radio and checkboxes, these are the data values that correspond to the text. For example, the option_text Yes,No may correspond to 1,0. This field is typically blank for instructions or textbox types.
 
-We have provided an folder with examples ([state-minfullness-survey](state-minfullness-survey)) that you can use to generate a new survey.
+We have provided an folder with examples ([state-mindfulness-survey](state-mindfulness-survey)) that you can use to generate a new survey.
 
 ## Run the Container
 To generate the survey, we will run the container from the folder where our two files are.
@@ -31,7 +31,7 @@ because most of the arguments are set in the image. We just need to make sure th
 
 
 
-```
+```bash
 cd state-mindfulness-survey
 ls 
 config.json    survey.tsv
@@ -39,7 +39,7 @@ config.json    survey.tsv
 
 The output is minimal, but when we finish, our survey is ready!
 
-```
+```bash
 $ docker run -v $PWD:/data expfactory/survey-generator start
 Writing output files to /data/index.html
 index.html
@@ -54,20 +54,20 @@ config.json  css  index.html  js  LICENSE  README.md  survey.tsv
 
 Now we can easily test it by opening a web browser:
 
-```
+```bash
 python -m http.server 9999
 ```
 
 If you need to generate the `index.html` again and force overwrite, use `--force`.
 
-```
+```bash
 docker run -v $PWD:/data vanessa/expfactory-survey start --force
 ```
 
 ## Development
 If you want to build the image:
 
-```
+```bash
 docker build -t vanessa/expfactory-survey .
 ```
 

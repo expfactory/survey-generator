@@ -1,10 +1,10 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 # docker build -t vanessa/survey-generator
 
 RUN apt-get update && apt-get install -y git python3-pip python3-dev
 WORKDIR /opt 
-RUN git clone https://www.github.com/expfactory/expfactory
+RUN git clone https://github.com/expfactory/expfactory
 WORKDIR expfactory 
 RUN python3 setup.py install
 RUN python3 -m pip install pandas
