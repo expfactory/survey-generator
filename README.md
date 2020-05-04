@@ -31,7 +31,7 @@ because most of the arguments are set in the image. We just need to make sure th
 
 
 
-```
+```bash
 cd state-mindfulness-survey
 ls 
 config.json    survey.tsv
@@ -39,7 +39,7 @@ config.json    survey.tsv
 
 The output is minimal, but when we finish, our survey is ready!
 
-```
+```bash
 $ docker run -v $PWD:/data expfactory/survey-generator start
 Writing output files to /data/index.html
 index.html
@@ -54,20 +54,20 @@ config.json  css  index.html  js  LICENSE  README.md  survey.tsv
 
 Now we can easily test it by opening a web browser:
 
-```
+```bash
 python -m http.server 9999
 ```
 
 If you need to generate the `index.html` again and force overwrite, use `--force`.
 
-```
+```bash
 docker run -v $PWD:/data vanessa/expfactory-survey start --force
 ```
 
 ## Development
 If you want to build the image:
 
-```
+```bash
 docker build -t vanessa/expfactory-survey .
 ```
 
