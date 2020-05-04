@@ -26,12 +26,13 @@ workflows:
                    echo "Version for Docker tag is ${DOCKER_TAG}"
                    MANUAL_VERSION=$(cat VERSION)
                    docker tag quay.io/expfactory/survey-generator:latest quay.io/expfactory/survey-generator:${MANUAL_VERSION}
+                   docker images
             - run:
                 name: Run Tests
                 command: |
                    EXPFACTORY_SURVEY=state-mindfulness-survey
                    CONTAINER_NAME=quay.io/expfactory/survey-generator
-                   DOCKER_TAG=$(echo "${CIRCLE_SHA1}" | cut -c1-10)
+                   DOCKER_TAG=latest
                    echo "The Experiment Factory!"
                    echo "[run] docker run ${CONTAINER_NAME}:${DOCKER_TAG} start"
                    docker run --name surveys -td --entrypoint bash ${CONTAINER_NAME}:${DOCKER_TAG}
