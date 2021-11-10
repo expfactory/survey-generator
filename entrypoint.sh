@@ -46,7 +46,7 @@ if [ "$1" == "start" ]; then
         if [ -e "/data/.github/workflows/build-deploy.yaml" ]; then
             echo "Found .github/workflows/build-deploy.yaml in output destination, will not overwrite"
         else
-            cp /code/.github/workflows/build-deploy.yaml
+            cp /code/.github/workflows/build-deploy.yaml /data/.github/workflows
         fi        
         if [ -e "/data/README.md" ]; then
             echo "Found README.md in output destination, will not overwrite"
