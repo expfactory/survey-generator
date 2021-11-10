@@ -54,20 +54,20 @@ config.json  css  index.html  js  LICENSE  README.md  survey.tsv
 Now we can easily test it by opening a web browser:
 
 ```bash
-python -m http.server 9999
+$ python -m http.server 9999
 ```
 
 If you need to generate the `index.html` again and force overwrite, use `--force`.
 
 ```bash
-docker run -v $PWD:/data vanessa/expfactory-survey start --force
+$ docker run -v $PWD:/data vanessa/expfactory-survey start --force
 ```
 
 ## Development
 If you want to build the image:
 
 ```bash
-docker build -t vanessa/expfactory-survey .
+$ docker build -t expfactory/survey-generator .
 ```
 
 You will want to update the [VERSION](VERSION) file that is used to build the

@@ -1,6 +1,6 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
-# docker build -t vanessa/survey-generator
+# docker build -t expfactory/survey-generator .
 
 RUN apt-get update && apt-get install -y git python3-pip python3-dev
 WORKDIR /opt 
