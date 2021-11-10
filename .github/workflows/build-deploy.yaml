@@ -16,7 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2        
-
       - name: Build Experiment Factory Container
         env:
           dirname: ${{ github.event.repository.name }}
