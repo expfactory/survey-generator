@@ -43,6 +43,7 @@ jobs:
         if: (github.event_name != 'pull_request')
         env:
           dirname: ${{ github.event.repository.name }}
+          owner: ${{ github.repository_owner }}
         run: |
             docker images
             docker push ghcr.io/${owner}/${dirname}:latest
