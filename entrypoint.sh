@@ -41,6 +41,13 @@ if [ "$1" == "start" ]; then
             echo "LICENSE"
         fi
 
+        # Move GitHub workflow if does not exist
+        mkdir -p /data/.github/workflows
+        if [ -e "/data/.github/workflows/build-deploy.yaml" ]; then
+            echo "Found .github/workflows/build-deploy.yaml in output destination, will not overwrite"
+        else
+            cp /code/.github/workflows/build-deploy.yaml /data/.github/workflows
+        fi        
         if [ -e "/data/README.md" ]; then
             echo "Found README.md in output destination, will not overwrite"
         else
@@ -56,6 +63,6 @@ if [ "$1" == "start" ]; then
 else
     echo "Usage
 
-          docker run -v my-survey:/data vanessa/expfactory-survey start [options]"
+          docker run -v my-survey:/data expfactory/survey-generator start [options]"
           python3 /code/survey.py --help
 fi
